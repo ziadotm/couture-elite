@@ -14,7 +14,7 @@ $connection->createDatabase('vetement');
  firstname VARCHAR(30) NOT NULL,
  lastname VARCHAR(30) NOT NULL,
  email VARCHAR(50) UNIQUE,
- password VARCHAR(80)
+ password VARCHAR(250)
 
  )
  ";

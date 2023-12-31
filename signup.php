@@ -56,7 +56,6 @@ if (isset($_POST["submit"])) {
 if (isset($_POST["blogin"])) {
     $email_input = $_POST["lemail"];
     $pass_input = $_POST["lpassword"];
-    // die($email_input);
     Client::login($email_input, $pass_input,$connection->conn);
 }
 

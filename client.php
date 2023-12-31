@@ -1,5 +1,7 @@
 <?php
 
+include('session.php');
+
 class Client{
 
 public $id;
@@ -22,7 +24,7 @@ public function __construct($firstname2,$lastname,$email,$password,$idCity){
     $this->firstname = $firstname2;
     $this->lastname = $lastname;
     $this->email = $email;
-    $this->password = password_hash($password,PASSWORD_DEFAULT);
+    $this->password = md5($password);
     $this->idCity=$idCity;
 
 }
@@ -40,12 +42,16 @@ self::$successMsg= "New record created successfully";
 }
 }
 public static function login($email,$password,$conn){
-    $sql = "SELECT * FROM Clients   WHERE email = $email and password =$password";
+
+    $hashed_password = md5($password);
+    $sql = "SELECT * FROM clients WHERE email='$email' AND password='$hashed_password' ";
     $res=mysqli_query($conn, $sql);
     if (mysqli_num_rows($res)== 0) {
-        die("nadi");
+        echo "incorect credentials";
     }else{
-        die('nn');
+        $row = $res->fetch_assoc();
+        Session::init($row);
+        header('Location:index.php');
     }
 }
 public static function  selectAllClients($tableName,$conn){
