@@ -1,5 +1,7 @@
 <?php
 
+
+include('session.php');
 class Admin{
 
 public $id;
@@ -21,7 +23,7 @@ public function __construct($firstname2,$lastname,$email,$password){
     $this->firstname = $firstname2;
     $this->lastname = $lastname;
     $this->email = $email;
-    $this->password = password_hash($password,PASSWORD_DEFAULT);
+    $this->password = md5($password);
    
 
 }
@@ -40,6 +42,21 @@ self::$successMsg= "New record created successfully";
 
 
 
+}
+
+
+public static function login($email,$password,$conn){
+
+    $hashed_password = md5($password);
+    $sql = "SELECT * FROM admin WHERE email='$email' AND password='$hashed_password' ";
+    $res=mysqli_query($conn, $sql);
+    if (mysqli_num_rows($res)== 0) {
+        echo "incorect credentials";
+    }else{
+        $row = $res->fetch_assoc();
+        Session::init($row);
+        header('Location:backoffice.php');
+    }
 }
 
 public static function  selectAllAdmin($tableName,$conn){

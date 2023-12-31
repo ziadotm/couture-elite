@@ -168,7 +168,7 @@ if (isset($_POST["blogin"])) {
                     <button type="submitl" class="btn btn-outline-primary" href="frontpage.html" name="blogin">Login</button>
                 </div>
             </form>
-            <center> <a href="loginadmin.php">you are an admin ?</a></center>
+            <center> <a href="admin/login.php">you are an admin ?</a></center>
     </div>
     </center>
 

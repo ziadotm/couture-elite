@@ -1,6 +1,6 @@
 <?php
 //include connection file
-include('connection.php');
+include('../connection.php');
    
 
 //create in instance of class Connection
@@ -38,7 +38,7 @@ if(isset($_POST["submit"])){
        
     
     //include the client file
-    include('admin.php');
+    include('../admin.php');
 
     //create new instance of client class with the values of the inputs
     $admin = new Admin($fnameValue,$lnameValue,$emailValue,$passwordValue);
@@ -123,13 +123,12 @@ echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
             }
   ?>  
       
-
             <div class="row mb-3">
                     <div class="offset-sm-1 col-sm-3 d-grid">
                         <button name="submit" type="submit" class=" btn btn-primary">Signup</button>
                     </div>
                     <div class="col-sm-1 col-sm-3 d-grid">
-                        <a class="btn btn-outline-primary" href="frontadmin.php">Login</a>
+                        <a class="btn btn-outline-primary" href="login.php">Login</a>
                     </div>
             </div>
         </form>

@@ -31,19 +31,18 @@ class City{
     }
     
 
-
     public static function selectAllcities($tableName,$conn){
-        $sql = "SELECT id, name  FROM $tableName ";
+        $sql = "SELECT * FROM `$tableName`";
+        $data=[];
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
         // output data of each row
-        $data=[];
         while($row = mysqli_fetch_assoc($result)) {
         
             $data[]=$row;
         }
+        }
         return $data;
-    }
     }
 
     public static function selectCityById($tableName,$conn,$id){
@@ -55,6 +54,17 @@ class City{
     
     }
     return $row;
+    }
+
+
+    public static function deleteById($tableName,$id,$conn){
+        $sql = "DELETE FROM $tableName WHERE id=$id";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "Record deleted successfully";
+          } else {
+            echo "Error deleting record: " . $conn->error;
+          }
     }
 }
 

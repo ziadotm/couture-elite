@@ -1,7 +1,8 @@
 <?php
 //include connection file
-include('connection.php');
-   
+include('../connection.php');
+include('city.php');
+
 
 //create in instance of class Connection
 $connection = new Connection();
@@ -10,6 +11,15 @@ $connection = new Connection();
 //call the selectDatabase method
 $connection->selectDatabase('vetement');
 $cityValue = "";
+
+
+$cities = City::selectAllcities("cities",$connection->conn);
+
+
+if($_GET["delete"]){
+
+    city::deleteById("cities",$_GET["delete"], $connection->conn);
+}
 
 if(isset($_POST["submitc"])){
 
@@ -24,7 +34,6 @@ if(isset($_POST["submitc"])){
        
     
     //include the client file
-    include('city.php');
    
     //create new instance of client class with the values of the inputs
     $cit = new City($cityValue);
@@ -56,6 +65,26 @@ $cityValue = "";
     <title>CRUD</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <style>
+table{
+	width:100%;
+}
+td form {
+	margin:0;padding:0;
+}
+td form button.button{
+	padding:0.25em;margin:0.25em;
+	background:none;
+	color:blue;
+}
+td form button.button:hover{
+  background:none;
+	color:steelblue;
+}
+    </style>    
 </head>
 <body>
     <div class="container my-5 ">
@@ -99,6 +128,39 @@ echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
 </div>";
             }
   ?>  
+
+
+
+<div class="row">
+  <div class="large-12 columns">
+    <table id="test-table">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>city name</th>
+        </tr>
+      </thead>
+      <tfoot></tfoot>
+      <tbody>
+	
+        <?php foreach($cities as $city) { ?>
+       
+
+            <tr>
+          <td><?php echo $city['id']?> </td>
+          <td><?php echo $city['name']?> </td>
+          <td>
+						<form action="">
+						  <a href="?delete=<?php echo $city['id'];?>">supprimer</a>
+						</form>
+					</td>
+        </tr>
+
+        <?php } ?>    
+      </tbody>
+    </table>
+  </div>
+</div>
       
 
 </body>

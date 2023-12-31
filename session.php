@@ -6,14 +6,14 @@ class Session {
     public static function init($userInformation){
         if(isset($userInformation)){
             session_start();
-            $this->fillSession($userInformation);      
+            self::fillSession($userInformation);      
         }
       
     
     }
 
 
-    public function fillSession($userInformation) {
+    public static function fillSession($userInformation) {
 
         $_SESSION ["email"] = $userInformation["email"];
         $_SESSION ["firstname"] = $userInformation["firstname"];

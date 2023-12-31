@@ -26,8 +26,6 @@ public function insertcategorie($tableName,$conn){
         self::$errorMsg ="Error: " . $sql . "<br>" . mysqli_error($conn);
     }
     
-    
-    
     }
 
 }

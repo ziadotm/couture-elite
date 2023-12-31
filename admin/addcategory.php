@@ -1,6 +1,6 @@
 <?php
 //include connection file
-include('connection.php');
+include('../connection.php');
 
 
 //create in instance of class Connection
